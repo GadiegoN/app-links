@@ -61,11 +61,6 @@ export function SignIn() {
                     <Button type="submit" className="w-full">Entrar</Button>
                 </div>
             </form>
-
-            <div className="flex w-full justify-between">
-                <Button variant="link">Esqueceu a senha</Button>
-                <Button variant="link"><Link to="/registrar">Criar conta</Link></Button>
-            </div>
         </div>
     )
 }
