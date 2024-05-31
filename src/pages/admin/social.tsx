@@ -17,6 +17,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { Loader } from "lucide-react"
+import { toast } from "sonner"
 
 export function Social() {
     const [loading, setLoading] = useState(false)
@@ -42,8 +43,8 @@ export function Social() {
                         setLinkedin(snapshot.data()?.linkedin)
                     }
                 })
-                .catch((error) => {
-                    console.log(error)
+                .catch(() => {
+                    toast.error("Erro ao buscar os links sociais!")
                 })
         }
 
@@ -63,8 +64,8 @@ export function Social() {
                         setDescription(snapshot.data()?.description)
                     }
                 })
-                .catch((error) => {
-                    console.log(error)
+                .catch(() => {
+                    toast.error("Erro ao buscar as informações do perfil!")
                 })
         }
 
@@ -82,11 +83,12 @@ export function Social() {
             linkedin: linkedin
         })
             .then(() => {
+                toast.success("Links sociais atualizados com sucesso!")
                 setLoading(false)
             })
-            .catch((error) => {
+            .catch(() => {
+                toast.error("Falha ao atualizar os links sociais!")
                 setLoading(false)
-                console.log(error)
             })
     }
 
@@ -101,11 +103,12 @@ export function Social() {
             description: description
         })
             .then(() => {
+                toast.success("Perfil atualizado com sucesso!")
                 setLoading(false)
             })
-            .catch((error) => {
+            .catch(() => {
+                toast.error("Falha ao atualizar o perfil!")
                 setLoading(false)
-                console.log(error)
             })
 
     }

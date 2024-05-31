@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 export function SignIn() {
     const [email, setEmail] = useState('')
@@ -17,20 +18,23 @@ export function SignIn() {
         e.preventDefault()
 
         if (email === '' || password === '') {
-            alert('Email ou senha incorretos!')
+            toast.error('Preencha todos os campos!')
+
+            return
         }
 
         signInWithEmailAndPassword(auth, email, password)
             .then(() => {
+                toast.success("Logado com sucesso!")
                 navigate('/painel')
             })
-            .catch((error) => {
-                console.log(error)
+            .catch(() => {
+                toast.error("Email ou senha incorretos!")
             })
     }
 
     return (
-        <div className="w-6/12 mx-auto mt-10 border border-black rounded-lg p-10">
+        <div className="w-11/12 md:w-8/12 lg:w-6/12 mx-auto mt-10 border border-black rounded-lg p-10">
             <h1>Bem vindx ;)</h1>
             <p>Entre com seu e-mail e senha!</p>
 
@@ -58,7 +62,7 @@ export function SignIn() {
                     />
                 </div>
                 <div>
-                    <Button type="submit" className="w-full">Entrar</Button>
+                    <Button type="submit" className="w-full mt-4">Entrar</Button>
                 </div>
             </form>
         </div>

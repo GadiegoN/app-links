@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore"
 import { Github, Instagram, Linkedin } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 interface LinksProps {
     id: string
@@ -56,7 +57,6 @@ export function Home() {
                             color: doc.data().color,
                         })
                     })
-                    console.log(list)
                     setLinks(list)
                 })
         }
@@ -78,8 +78,8 @@ export function Home() {
                         })
                     }
                 })
-                .catch((error) => {
-                    console.log(error)
+                .catch(() => {
+                    toast.error("Erro ao buscar os links sociais!")
                 })
         }
 
@@ -101,8 +101,8 @@ export function Home() {
                         })
                     }
                 })
-                .catch((error) => {
-                    console.log(error)
+                .catch(() => {
+                    toast.error("Erro ao buscar as informações do perfil!")
                 })
         }
 

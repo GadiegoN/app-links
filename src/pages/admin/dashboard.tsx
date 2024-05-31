@@ -9,7 +9,7 @@ import {
     doc,
     deleteDoc
 } from "firebase/firestore"
-
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -69,7 +69,7 @@ export function Dashboard() {
         e.preventDefault()
 
         if (nameInput === "" || urlInput === "") {
-            alert("Preencha todos os campos.")
+            toast.info("Preencha todos os campos.")
             return
         }
 
@@ -81,9 +81,9 @@ export function Dashboard() {
             created: new Date()
         }).then(() => {
             clearFields()
-            console.log("Cadastro efetuado com sucesso!")
-        }).catch((error) => {
-            console.log(error)
+            toast("Link adicionado com sucesso!")
+        }).catch(() => {
+            toast.error("Erro ao adicionar link!")
         })
     }
 
@@ -91,6 +91,8 @@ export function Dashboard() {
         const docRef = doc(db, "links", id)
 
         await deleteDoc(docRef)
+
+        toast.error("Link removido com sucesso!")
     }
 
     return (
