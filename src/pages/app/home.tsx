@@ -25,9 +25,17 @@ interface SocialLinksProps {
     linkedin: string
 }
 
+interface SocialProfileProps {
+    avatar: string
+    name: string
+    title: string
+    description: string
+}
+
 export function Home() {
     const [links, setLinks] = useState<LinksProps[]>([])
     const [socialLinks, setSocialLinks] = useState<SocialLinksProps>()
+    const [socialProfile, setSocialProfile] = useState<SocialProfileProps>()
 
     useEffect(() => {
         function loadLinks() {
@@ -78,10 +86,41 @@ export function Home() {
         loadSocialLinks()
     }, [])
 
+    useEffect(() => {
+        function loadProfile() {
+            const docRef = doc(db, "social", "profile")
+
+            getDoc(docRef)
+                .then((snapshot) => {
+                    if (snapshot.data() !== undefined) {
+                        setSocialProfile({
+                            avatar: snapshot.data()?.avatar,
+                            name: snapshot.data()?.name,
+                            title: snapshot.data()?.title,
+                            description: snapshot.data()?.description,
+                        })
+                    }
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
+
+        loadProfile()
+    }, [])
+
     return (
         <div className="px-10 flex flex-col justify-center items-center">
-            <img src="https://github.com/gadiegon.png" className="w-4h-40 h-40 rounded-full border-2 border-red-500 hover:scale-110 mb-6" alt="" />
-            <h1 className="text-2xl font-bold">Gadiego Nogueira</h1>
+            {
+                socialProfile && Object.keys(socialProfile).length > 0 && (
+                    <div className="flex flex-col items-center gap-4">
+                        <img src={socialProfile.avatar} className="w-4h-40 h-40 rounded-full border-2 border-red-500 hover:scale-110 mb-6" alt="" />
+                        <h1 className="text-2xl font-bold">{socialProfile.name}</h1>
+                        <p>{socialProfile.title}</p>
+                        <p className="max-w-lg text-justify">{socialProfile.description}</p>
+                    </div>
+                )
+            }
 
             <div className="flex flex-col mb-2 w-full max-w-xl gap-4 mt-8">
                 {

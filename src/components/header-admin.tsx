@@ -24,7 +24,7 @@ export function HeaderAdmin() {
                 <div className="flex">
                     <Button variant="link"><Link to="/"><p className="sr-only md:not-sr-only lg:not-sr-only">Home</p><Home className="not-sr-only md:sr-only lg:sr-only" /></Link></Button>
                     <Button variant="link"><Link to="/painel"><p className="sr-only md:not-sr-only lg:not-sr-only">Link</p><Link2 className="not-sr-only md:sr-only lg:sr-only" /></Link></Button>
-                    <Button variant="link"><Link to="/painel/social"><p className="sr-only md:not-sr-only lg:not-sr-only">Redes Sociais</p><UserCircle className="not-sr-only md:sr-only lg:sr-only" /></Link></Button>
+                    <Button variant="link"><Link to="/painel/social"><p className="sr-only md:not-sr-only lg:not-sr-only">Sociais</p><UserCircle className="not-sr-only md:sr-only lg:sr-only" /></Link></Button>
                 </div>
                 <Button variant="destructive" size="icon" onClick={handleLogout}>
                     <LogOut className="h-[1.2rem] w-[1.2rem]" />
